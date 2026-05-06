@@ -6,6 +6,8 @@
   <title>Contact Us | Taylor's HVAC Inc. — Tarboro, NC</title>
   <meta name="description" content="Contact Taylor's HVAC Inc. for a free estimate or 24/7 emergency service in Tarboro, NC and surrounding areas." />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/jpeg" href="images/logo/logo.jpg" />
+  <link rel="apple-touch-icon" href="images/logo/logo.jpg" />
 </head>
 <body>
 
@@ -118,14 +120,10 @@
           <h3>Request a Free Estimate</h3>
           <p>Fill out the form below and we'll get back to you promptly. For emergencies, please call directly.</p>
 
-          <!--
-            TO MAKE THIS FORM FUNCTIONAL:
-            1. Sign up at https://formspree.io (free tier available)
-            2. Create a new form and copy your form ID
-            3. Replace "YOUR_FORM_ID" below with your actual Formspree form ID
-            Example: action="https://formspree.io/f/abcd1234"
-          -->
-          <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form id="contact-form" action="https://formsubmit.co/evelyn@taylorshvac.com" method="POST">
+            <input type="hidden" name="_cc" value="susan@taylorshvac.com" />
+            <input type="hidden" name="_subject" value="New Estimate Request — Taylor's HVAC" />
+            <input type="hidden" name="_captcha" value="false" />
             <div class="form-row">
               <div class="form-group">
                 <label for="first-name">First Name *</label>
