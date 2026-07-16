@@ -905,3 +905,200 @@ textarea { resize: vertical; min-height: 130px; }
   border-left: 3px solid var(--border);
 }
 .sms-consent a { color: var(--accent); text-decoration: underline; }
+
+
+/* ============================================================
+   MOTION & MODERN ENHANCEMENTS  (shared: HVAC + Reno)
+   Adds animation/depth on top of the existing design.
+   Palette unchanged (navy --primary, red --accent).
+   ============================================================ */
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 2000;
+  background: linear-gradient(90deg, var(--accent), #ff6b6b);
+  box-shadow: 0 0 12px rgba(220,38,38,0.6);
+  transition: width 0.1s linear;
+}
+
+/* ── Scroll reveal (only active when JS adds html.motion) ── */
+html.motion .section-header,
+html.motion .service-card,
+html.motion .why-item,
+html.motion .seasonal-card,
+html.motion .process-step,
+html.motion .testimonial-card,
+html.motion .value-card,
+html.motion .license-card,
+html.motion .about-intro-img,
+html.motion .about-number,
+html.motion .service-detail-body,
+html.motion .service-detail-img,
+html.motion .contact-info,
+html.motion .contact-form-wrap,
+html.motion .contact-detail,
+html.motion .area-tag,
+html.motion .trust-item,
+html.motion .team-showcase,
+html.motion .zeke-img-wrap,
+html.motion .zeke-body,
+html.motion .military-discount-card,
+html.motion .sister-inner,
+html.motion .gallery-item,
+html.motion .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,0.84,0.44,1);
+  will-change: opacity, transform;
+}
+html.motion .in-view { opacity: 1 !important; transform: none !important; }
+
+/* ── Hero entrance (on load) ── */
+@keyframes heroIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+html.motion .hero-label,
+html.motion .hero h1,
+html.motion .hero-sub,
+html.motion .hero-actions,
+html.motion .hero-emergency,
+html.motion .hero-stats {
+  opacity: 0;
+  animation: heroIn 0.9s cubic-bezier(0.16,0.84,0.44,1) forwards;
+}
+html.motion .hero-label    { animation-delay: 0.15s; }
+html.motion .hero h1       { animation-delay: 0.30s; }
+html.motion .hero-sub      { animation-delay: 0.45s; }
+html.motion .hero-actions  { animation-delay: 0.60s; }
+html.motion .hero-emergency{ animation-delay: 0.75s; }
+html.motion .hero-stats    { animation-delay: 0.90s; }
+
+/* Animated gradient shimmer on the hero highlight word */
+.hero h1 span {
+  background: linear-gradient(100deg, var(--accent) 0%, #ff8585 50%, var(--accent) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: textShine 6s linear infinite;
+}
+@keyframes textShine { to { background-position: 200% center; } }
+
+/* Slow Ken-Burns drift on hero background image */
+html.motion .hero-bg { animation: kenburns 26s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform: scale(1) translate(0,0); } to { transform: scale(1.12) translate(-2%, -2%); } }
+
+/* ── Floating gradient orbs (injected into dark sections by JS) ── */
+.fx-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.fx-orbs b {
+  position: absolute; display: block; border-radius: 50%;
+  filter: blur(70px); opacity: 0.5; mix-blend-mode: screen;
+  animation: orbFloat 18s ease-in-out infinite alternate;
+}
+@keyframes orbFloat {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(var(--dx,40px), var(--dy,-30px)) scale(1.25); }
+}
+
+/* Ensure section content sits above the orbs */
+.hero, .process-section, .trust-strip, .zeke-section, .cta-banner, .page-hero { position: relative; overflow: hidden; }
+.hero > .container,
+.process-section > .container,
+.trust-strip > .container,
+.zeke-section > .container,
+.cta-banner > .container,
+.page-hero > .container { position: relative; z-index: 1; }
+
+/* ── Animated pulsing dot on every section label ── */
+.section-label::before, .hero-label::before {
+  content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; margin-right: 8px; vertical-align: middle;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(220,38,38,0.5); }
+  50%      { opacity: 0.55; box-shadow: 0 0 0 6px rgba(220,38,38,0); }
+}
+
+/* ── Nav link underline sweep ── */
+.nav-links a:not(.nav-phone):not(.btn) { position: relative; }
+.nav-links a:not(.nav-phone):not(.btn)::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav-links a:not(.nav-phone):not(.btn):hover::after,
+.nav-links a:not(.nav-phone):not(.btn).active::after { transform: scaleX(1); }
+
+/* ── Button gloss sweep ── */
+.btn { position: relative; overflow: hidden; }
+.btn::before {
+  content: ''; position: absolute; top: 0; left: -120%; width: 55%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg); transition: left 0.6s ease; pointer-events: none;
+}
+.btn:hover::before { left: 150%; }
+
+/* ── Card hover depth ── */
+.service-card { position: relative; overflow: hidden; }
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ff8585);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon { transition: transform 0.35s ease; }
+.service-card:hover .service-icon { transform: translateY(-2px) scale(1.08) rotate(-3deg); }
+
+.value-card, .license-card, .testimonial-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.value-card:hover, .license-card:hover, .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.value-icon { transition: transform 0.35s ease; display: inline-block; }
+.value-card:hover .value-icon { transform: translateY(-3px) scale(1.08); }
+
+.why-icon { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+.why-item:hover .why-icon { transform: translateY(-4px) scale(1.06); box-shadow: 0 10px 24px rgba(12,35,64,0.28); }
+
+/* ── Process step pulsing ring ── */
+html.motion .process-num::after {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%;
+  border: 2px solid rgba(220,38,38,0.55); opacity: 0;
+  animation: ring 2.6s ease-out infinite;
+}
+@keyframes ring { 0% { transform: scale(0.8); opacity: 0.7; } 100% { transform: scale(1.55); opacity: 0; } }
+
+/* ── Trust icons gentle bob ── */
+html.motion .trust-item-icon { animation: bob 3s ease-in-out infinite; }
+.trust-item:nth-child(2) .trust-item-icon { animation-delay: 0.35s; }
+.trust-item:nth-child(3) .trust-item-icon { animation-delay: 0.70s; }
+.trust-item:nth-child(4) .trust-item-icon { animation-delay: 1.05s; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* ── Area tags lift ── */
+.area-tag { transition: background var(--transition), border-color var(--transition), color var(--transition), transform 0.25s ease; }
+.area-tag:hover { transform: translateY(-3px); }
+
+/* ── Gallery zoom (Reno) ── */
+.gallery-item { overflow: hidden; }
+.gallery-item img { transition: transform 0.55s cubic-bezier(0.16,0.84,0.44,1); }
+.gallery-item:hover img { transform: scale(1.07); }
+
+/* ── Footer link slide ── */
+.footer-links a { transition: color var(--transition), padding-left 0.25s ease; }
+.footer-links a:hover { padding-left: 6px; }
+
+/* ── Respect reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html.motion *,
+  html.motion *::before,
+  html.motion *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html.motion .section-header,
+  html.motion .service-card,
+  html.motion [class*="reveal"],
+  html.motion .hero-label,
+  html.motion .hero h1,
+  html.motion .hero-sub,
+  html.motion .hero-actions,
+  html.motion .hero-emergency,
+  html.motion .hero-stats { opacity: 1 !important; transform: none !important; }
+  .fx-orbs { display: none !important; }
+}
